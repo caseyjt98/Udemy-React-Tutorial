@@ -1,3 +1,13 @@
 .App {
   text-align: center;
 }
+
+
+.SwitchNameButton {
+  background-color: #cab0b025;
+  font: inherit;
+  border: 1px solid black;
+  padding: 8px;
+  cursor: pointer; 
+  border-radius: 12px;
+}

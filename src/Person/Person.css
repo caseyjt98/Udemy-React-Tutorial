@@ -1,6 +1,6 @@
 .Person {
     width: 60%;
-    margin: auto; /* center it */
+    margin: 16px auto; /* 12px to separate cards, auto to center it */
     border: 1px solid #eee; 
     box-shadow: 0 2px 3px #ccc;
     padding: 16px; 

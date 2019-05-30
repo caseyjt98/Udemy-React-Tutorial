@@ -13,7 +13,8 @@ class App extends Component {
       { name: 'Elana', age: 21 }
     ],
 
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPersons: false
   }
 
   // event handler function for button click, pass as a reference to onClick
@@ -40,23 +41,38 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  }
+
   render() {
     return (
       <div className="App">
         <h1> Hi, I'm a react app </h1>
         <p> React is cool </p>
-        <button onClick={this.switchNameHandler.bind(this, 'Quesarito')}> Switch Name </button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(this, 'Quesarito!!')} > My Hobbies: Running </Person>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          changed={this.nameChangedHandler} />
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age} />
+        <button
+          className="SwitchNameButton"
+          onClick={this.togglePersonsHandler}> Toggle Persons
+        </button>
+
+        {
+          this.state.showPersons ?
+            <div>
+              <Person
+                name={this.state.persons[0].name}
+                age={this.state.persons[0].age}
+                click={this.switchNameHandler.bind(this, 'Quesarito!!')} > My Hobbies: Running </Person>
+              <Person
+                name={this.state.persons[1].name}
+                age={this.state.persons[1].age}
+                changed={this.nameChangedHandler} />
+              <Person
+                name={this.state.persons[2].name}
+                age={this.state.persons[2].age} />
+            </div> : null
+        }
+
       </div>
     );
   }
