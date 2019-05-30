@@ -20,26 +20,27 @@ class App extends Component {
 
   // event handler for input onChange , takes in id of name to change
   nameChangedHandler = (event, id) => {
+    // get index of person with matching id
     const personIndex = this.state.persons.findIndex(p => {
       return p.id == id;
-    }); // finds the person you are looking for in array
-    // personIndex will hold the index of the desired person
+    });
+    // personIndex now holds the index of the desired person
 
-    // create COPY of object, with all the same properties, using spread operator...
+    // create COPY of desired person object (with all the same properties) using spread operator...
     const person = {
       ...this.state.persons[personIndex]
     };
 
-    // now update name of person
+    // now update name of this copy 
 
     person.name = event.target.value;
 
-    // now update array, at correct index
+    // now update a COPY of the array with updated person, at correct index
 
-    const persons = [...this.state.persons]; // copy
-    persons[personIndex] = person;
+    const persons = [...this.state.persons]; // ... spread operator creates copy
+    persons[personIndex] = person; // updates copy of array with updated person object
 
-    this.setState({ persons: persons }); // update state using the mutated copy 
+    this.setState({ persons: persons }); // finally, update state using the mutated copy 
 
   }
   // takes in index of element to be removed
