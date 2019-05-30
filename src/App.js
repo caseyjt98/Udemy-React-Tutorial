@@ -17,18 +17,6 @@ class App extends Component {
     showPersons: false
   }
 
-  // event handler function for button click, pass as a reference to onClick
-  switchNameHandler = (newName) => {
-    // DON'T DO THIS: this.state.persons[0] = 'Quesarito';
-    // setState will merge the new state with the old state
-    this.setState({
-      persons: [
-        { name: newName, age: 20 },
-        { name: 'Claire', age: 21 },
-        { name: 'Elana', age: 21 }
-      ]
-    })
-  }
 
   // event handler for input onChange 
   nameChangedHandler = (event) => {
@@ -40,6 +28,17 @@ class App extends Component {
       ]
     })
   }
+
+  // takes in index of element to be removed
+  // remove person upon click
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice(); // slice creates a COPY of the persons array 
+    const persons = [...this.state.persons]; // equivalent of slice - creates a copy of original array
+    persons.splice(personIndex, 1); // removes 1 element @ index 'personIndex' in persons array and returns the removed  element 
+    this.setState({ persons: persons }); // update persons array in state
+  }
+
+
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
@@ -53,10 +52,11 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((person, index) => {
             return <Person
               name={person.name}
-              age={person.age} />
+              age={person.age}
+              click={() => this.deletePersonHandler(index)} />
           })}
         </div>
       );
